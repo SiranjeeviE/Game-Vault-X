@@ -1,0 +1,14 @@
+node_modules/
+.env
+dist/
+build/
+.DS_Store
+*.log
+git_files.txt
+create_commits.py
+create_history.py
+recreate_commits.py
+nodetouch.ps1
+package-lock.json
+!frontend/package-lock.json
+!backend/package-lock.json
