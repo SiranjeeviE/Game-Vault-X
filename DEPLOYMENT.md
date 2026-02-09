@@ -36,8 +36,17 @@ This guide will help you deploy your full-stack application for free using **Ren
    - `VITE_API_URL`: Your Backend URL + `/api` (e.g., `https://gamevault-backend.onrender.com/api`).
 5. Click **Deploy**.
 
-## 4. Final Verification
-- Once both are live, visit your Frontend URL.
+## 4. Deploying to Vercel (Frontend Alternative)
+1. Sign up/Login to [Vercel](https://vercel.com).
+2. Click **Add New** > **Project**.
+3. Connect your GitHub repository.
+4. **CRITICAL STEP**: Click "Edit" next to **Root Directory** and select `frontend`.
+5. Under "Environment Variables", add:
+   - `VITE_API_URL`: Your Backend URL (from Render) + `/api`.
+6. Click **Deploy**.
+
+## 5. Final Verification
+- Once both are live, visit your site URL.
 - Test the login/signup and browse the games.
 - **Note**: The first load on Render "free tier" might take ~30 seconds if the instance is sleeping.
 
