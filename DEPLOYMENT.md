@@ -45,6 +45,9 @@ This guide will help you deploy your full-stack application for free using **Ren
    - `VITE_API_URL`: Your Backend URL (from Render) + `/api`.
 6. Click **Deploy**.
 
+> [!TIP]
+> If you encounter an `npm error ERESOLVE`, I have added a `.npmrc` file to the frontend to automatically handle peer dependency conflicts. Vercel will pick this up automatically.
+
 ## 5. Final Verification
 - Once both are live, visit your site URL.
 - Test the login/signup and browse the games.
