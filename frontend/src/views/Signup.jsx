@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import API_BASE_URL from '../config';
 import { AuthContext } from '../context/AuthContext';
 import { Gamepad2, Lock, Mail, User } from 'lucide-react';
 
@@ -14,7 +15,7 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:5000/api/auth/signup', {
+            const response = await fetch(`${API_BASE_URL}/auth/signup`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, email, password }),

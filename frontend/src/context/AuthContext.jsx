@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import API_BASE_URL from '../config';
 
 export const AuthContext = createContext();
 
@@ -20,7 +21,7 @@ export const AuthProvider = ({ children }) => {
 
     const fetchWishlist = async (token) => {
         try {
-            const res = await fetch('http://localhost:5000/api/user/profile', {
+            const res = await fetch(`${API_BASE_URL}/user/profile`, {
                 headers: { 'x-auth-token': token }
             });
             const data = await res.json();
@@ -49,7 +50,7 @@ export const AuthProvider = ({ children }) => {
     const addToWishlist = async (gameId) => {
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch(`http://localhost:5000/api/user/wishlist/${gameId}`, {
+            const res = await fetch(`${API_BASE_URL}/user/wishlist/${gameId}`, {
                 method: 'POST',
                 headers: { 'x-auth-token': token }
             });
@@ -63,7 +64,7 @@ export const AuthProvider = ({ children }) => {
     const removeFromWishlist = async (gameId) => {
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch(`http://localhost:5000/api/user/wishlist/${gameId}`, {
+            const res = await fetch(`${API_BASE_URL}/user/wishlist/${gameId}`, {
                 method: 'DELETE',
                 headers: { 'x-auth-token': token }
             });

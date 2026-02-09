@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import API_BASE_URL from '../config';
 import { useNavigate } from 'react-router-dom';
 import GameCard from '../components/GameCard';
 import { Gamepad2, User, Heart } from 'lucide-react';
@@ -20,7 +21,7 @@ const Profile = () => {
             const token = localStorage.getItem('token');
             if (token) {
                 try {
-                    const res = await fetch('http://localhost:5000/api/user/profile', {
+                    const res = await fetch(`${API_BASE_URL}/user/profile`, {
                         headers: { 'x-auth-token': token }
                     });
                     const data = await res.json();
