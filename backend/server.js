@@ -23,6 +23,16 @@ app.get('/', (req, res) => {
     res.send('GameVault X API is running');
 });
 
+// Health check route
+app.get('/api/health', (req, res) => {
+    const isConnected = mongoose.connection.readyState === 1;
+    res.status(isConnected ? 200 : 500).json({
+        status: 'UP',
+        database: isConnected ? 'connected' : 'disconnected',
+        timestamp: new Date().toISOString()
+    });
+});
+
 // Database Connection
 mongoose.connect(MONGODB_URI)
     .then(() => {
