@@ -102,6 +102,11 @@ const Login = () => {
                 <div style={{ marginTop: '2rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
                     Don't have an account? <Link to="/signup" style={{ color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 'bold' }}>Sign Up</Link>
                 </div>
+
+                {/* Debug Info */}
+                <div style={{ marginTop: '20px', fontSize: '0.8rem', color: '#666', textAlign: 'center' }}>
+                    Connecting to: <code style={{ background: '#333', padding: '2px 5px', borderRadius: '3px', color: '#0f0' }}>{API_BASE_URL}</code>
+                </div>
             </div>
         </div>
     );
