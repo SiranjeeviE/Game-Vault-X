@@ -37,9 +37,14 @@ app.get('/api/health', (req, res) => {
 mongoose.connect(MONGODB_URI)
     .then(() => {
         console.log('MongoDB Connected');
-        // Only start server if DB connects
-        app.listen(PORT, () => {
-            console.log(`Server running on http://localhost:${PORT}`);
-        });
+        // Only start server if NOT in production (Vercel handles startup)
+        if (process.env.NODE_ENV !== 'production') {
+            app.listen(PORT, () => {
+                console.log(`Server running on http://localhost:${PORT}`);
+            });
+        }
     })
     .catch(err => console.error('MongoDB Connection Error:', err));
+
+// Export for Vercel
+module.exports = app;

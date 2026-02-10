@@ -13,20 +13,17 @@ This guide will help you deploy your full-stack application for free using **Ren
      ```
      *(Note: Special characters in your password have been URL-encoded for compatibility)*
 
-## 2. Deploy the Backend (Node.js)
-1. Sign up/Login to [Render](https://render.com/).
-2. Click **New +** > **Web Service**.
+## 2. Deploy the Backend (Vercel)
+1. Sign up/Login to [Vercel](https://vercel.com/).
+2. Click **Add New** > **Project**.
 3. Connect your GitHub repository.
-4. Set the following:
-   - **Name**: `gamevault-backend`
-   - **Root Directory**: `backend`
-   - **Environment**: `Node`
-   - **Build Command**: `npm install`
-   - **Start Command**: `node server.js`
+4. **CRITICAL STEP**:
+   - **Root Directory**: Click "Edit" and select `backend`.
 5. **Environment Variables**:
    - `MONGODB_URI`: Your MongoDB Atlas connection string.
-   - `PORT`: `5000` (Render will override this, but good to have).
-6. Click **Deploy**. Copy the URL (e.g., `https://gamevault-backend.onrender.com`).
+   - `JWT_SECRET`: `gamevault_secret_key_123` (or your own secret).
+6. Click **Deploy**.
+7. **Copy the URL** (e.g., `https://gamevault-backend.vercel.app`).
 
 ## 3. Deploy the Frontend (React + Vite)
 1. In Render, click **New +** > **Static Site**.
