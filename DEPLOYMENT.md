@@ -9,7 +9,7 @@ This guide will help you deploy your full-stack application for free using **Ren
 4. In "Database Access", create a user and copy the connection string.
    - **Your Connection String**:
      ```
-     mongodb+srv://siranjeeviuser1:Siranjeevi_Atlas2026%40%23!!%40%23@cluster2026.zk38hks.mongodb.net/gamevaultx?appName=Cluster2026
+     mongodb+srv://siranjeeviuser1:gamavaultx-pro2@cluster2026.zk38hks.mongodb.net/gamevaultx?appName=Cluster2026
      ```
      *(Note: Special characters in your password have been URL-encoded for compatibility)*
 

@@ -24,11 +24,28 @@ app.get('/', (req, res) => {
 });
 
 // Health check route
-app.get('/api/health', (req, res) => {
-    const isConnected = mongoose.connection.readyState === 1;
-    res.status(isConnected ? 200 : 500).json({
+app.get('/api/health', async (req, res) => {
+    let connectionState = mongoose.connection.readyState;
+    let errorMsg = null;
+
+    // If not connected, try to connect explicitly to capture the error
+    if (connectionState !== 1) {
+        try {
+            console.log('Attempting to reconnect to MongoDB...');
+            await mongoose.connect(MONGODB_URI);
+            connectionState = mongoose.connection.readyState;
+        } catch (err) {
+            console.error('Reconnect Error:', err);
+            errorMsg = err.message;
+        }
+    }
+
+    res.status(connectionState === 1 ? 200 : 500).json({
         status: 'UP',
-        database: isConnected ? 'connected' : 'disconnected',
+        database: connectionState === 1 ? 'connected' : 'disconnected',
+        readyState: connectionState, // 0: disconnected, 1: connected, 2: connecting, 3: disconnecting
+        envVarLength: MONGODB_URI ? MONGODB_URI.length : 0, // Check if Env Var exists (don't show value)
+        error: errorMsg,
         timestamp: new Date().toISOString()
     });
 });
