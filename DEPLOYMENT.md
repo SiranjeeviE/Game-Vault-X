@@ -7,7 +7,11 @@ This guide will help you deploy your full-stack application for free using **Ren
 2. Create a free cluster.
 3. In "Network Access", add `0.0.0.0/0` (Allow access from anywhere).
 4. In "Database Access", create a user and copy the connection string.
-   - Example: `mongodb+srv://<user>:<password>@cluster0.mongodb.net/gamevaultx`
+   - **Your Connection String**:
+     ```
+     mongodb+srv://siranjeeviuser1:Siranjeevi_Atlas2026%40%23!!%40%23@cluster2026.zk38hks.mongodb.net/gamevaultx?appName=Cluster2026
+     ```
+     *(Note: Special characters in your password have been URL-encoded for compatibility)*
 
 ## 2. Deploy the Backend (Node.js)
 1. Sign up/Login to [Render](https://render.com/).
