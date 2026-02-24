@@ -38,3 +38,4 @@ Welcome to **GameVault X**, a comprehensive PC gaming discovery platform. This p
 1. Navigate to `frontend/`
 2. Install dependencies: `npm install`
 3. Start the dev server: `npm run dev`
+
