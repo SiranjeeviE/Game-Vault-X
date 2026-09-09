@@ -5,11 +5,11 @@ const cors = require('cors');
 const gameRoutes = require('./routes/gameRoutes');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
+const hardwareRoutes = require('./routes/hardwareRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI || process.env.DATABASE_URL || process.env.SUPABASE_DB_URL || process.env.SUPABASE_URL || 'mongodb://localhost:27017/gamevaultx';
-
 
 // Middleware
 app.use(cors());
@@ -19,6 +19,7 @@ app.use(express.json());
 app.use('/api/games', gameRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/hardware', hardwareRoutes);
 
 app.get('/', (req, res) => {
     res.send('GameVault X API is running');
