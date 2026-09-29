@@ -42,6 +42,28 @@ export const getFallbackSvg = (title = 'Game', genre = 'Action') => {
     return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 };
 
+/**
+ * Convert image URLs to vertical 600x900 poster format (full vertical poster image)
+ */
+export const getPosterImage = (url, title = '', genre = 'Action') => {
+    if (!url) return getFallbackSvg(title, genre);
+    if (typeof url === 'string' && url.includes('steamstatic.com')) {
+        return url.replace(/library_hero\.jpg|header\.jpg|capsule_616x353\.jpg/, 'library_600x900.jpg');
+    }
+    return url;
+};
+
+/**
+ * Convert image URLs to wide landscape hero banner format (for background backdrop)
+ */
+export const getHeroImage = (url, title = '', genre = 'Action') => {
+    if (!url) return getFallbackSvg(title, genre);
+    if (typeof url === 'string' && url.includes('steamstatic.com')) {
+        return url.replace(/library_600x900\.jpg|header\.jpg|capsule_616x353\.jpg/, 'library_600x900.jpg');
+    }
+    return url;
+};
+
 // Verified individual real game images dataset
 export const FALLBACK_GAMES = [
     // 2023-Present
@@ -58,7 +80,7 @@ export const FALLBACK_GAMES = [
         releaseYear: 2024,
         yearRange: "2023-Present",
         metacriticScore: 82,
-        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2358720/library_hero.jpg",
+        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2358720/library_600x900.jpg",
         systemRequirements: defaultSysReq,
         providers: [{ name: "Steam", url: "https://store.steampowered.com/app/2358720/", price: 3599 }]
     },
@@ -75,7 +97,7 @@ export const FALLBACK_GAMES = [
         releaseYear: 2023,
         yearRange: "2023-Present",
         metacriticScore: 89,
-        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1091500/library_hero.jpg",
+        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1091500/library_600x900.jpg",
         systemRequirements: defaultSysReq,
         providers: [{ name: "Steam", url: "https://store.steampowered.com/app/1091500/", price: 2999 }]
     },
@@ -92,7 +114,7 @@ export const FALLBACK_GAMES = [
         releaseYear: 2024,
         yearRange: "2023-Present",
         metacriticScore: 95,
-        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/library_hero.jpg",
+        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/library_600x900.jpg",
         systemRequirements: defaultSysReq,
         providers: [{ name: "Steam", url: "https://store.steampowered.com/app/1245620/", price: 3499 }]
     },
@@ -109,7 +131,7 @@ export const FALLBACK_GAMES = [
         releaseYear: 2023,
         yearRange: "2023-Present",
         metacriticScore: 96,
-        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/library_hero.jpg",
+        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1086940/library_600x900.jpg",
         systemRequirements: defaultSysReq,
         providers: [{ name: "Steam", url: "https://store.steampowered.com/app/1086940/", price: 2999 }]
     },
@@ -126,7 +148,7 @@ export const FALLBACK_GAMES = [
         releaseYear: 2024,
         yearRange: "2023-Present",
         metacriticScore: 94,
-        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2322010/library_hero.jpg",
+        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2322010/library_600x900.jpg",
         systemRequirements: defaultSysReq,
         providers: [{ name: "Steam", url: "https://store.steampowered.com/app/2322010/", price: 3999 }]
     },
@@ -145,7 +167,7 @@ export const FALLBACK_GAMES = [
         releaseYear: 2022,
         yearRange: "2020-2022",
         metacriticScore: 93,
-        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1593500/library_hero.jpg",
+        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1593500/library_600x900.jpg",
         systemRequirements: defaultSysReq,
         providers: [{ name: "Steam", url: "https://store.steampowered.com/app/1593500/", price: 3299 }]
     },
@@ -162,7 +184,7 @@ export const FALLBACK_GAMES = [
         releaseYear: 2022,
         yearRange: "2020-2022",
         metacriticScore: 87,
-        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1817070/library_hero.jpg",
+        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1817070/library_600x900.jpg",
         systemRequirements: defaultSysReq,
         providers: [{ name: "Steam", url: "https://store.steampowered.com/app/1817070/", price: 3999 }]
     },
@@ -181,7 +203,7 @@ export const FALLBACK_GAMES = [
         releaseYear: 2019,
         yearRange: "2015-2019",
         metacriticScore: 97,
-        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/library_hero.jpg",
+        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1174180/library_600x900.jpg",
         systemRequirements: defaultSysReq,
         providers: [{ name: "Steam", url: "https://store.steampowered.com/app/1174180/", price: 3199 }]
     },
@@ -198,7 +220,7 @@ export const FALLBACK_GAMES = [
         releaseYear: 2015,
         yearRange: "2015-2019",
         metacriticScore: 93,
-        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/292030/library_hero.jpg",
+        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/292030/library_600x900.jpg",
         systemRequirements: defaultSysReq,
         providers: [{ name: "Steam", url: "https://store.steampowered.com/app/292030/", price: 899 }]
     },
@@ -217,7 +239,7 @@ export const FALLBACK_GAMES = [
         releaseYear: 2011,
         yearRange: "2010-2014",
         metacriticScore: 94,
-        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/489830/library_hero.jpg",
+        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/489830/library_600x900.jpg",
         systemRequirements: defaultSysReq,
         providers: [{ name: "Steam", url: "https://store.steampowered.com/app/489830/", price: 1799 }]
     },
@@ -236,7 +258,7 @@ export const FALLBACK_GAMES = [
         releaseYear: 2004,
         yearRange: "2005-2009",
         metacriticScore: 96,
-        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/220/library_hero.jpg",
+        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/220/library_600x900.jpg",
         systemRequirements: defaultSysReq,
         providers: [{ name: "Steam", url: "https://store.steampowered.com/app/220/", price: 480 }]
     },
@@ -255,7 +277,7 @@ export const FALLBACK_GAMES = [
         releaseYear: 2000,
         yearRange: "2000-2004",
         metacriticScore: 88,
-        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/10/library_hero.jpg",
+        posterImage: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/10/library_600x900.jpg",
         systemRequirements: defaultSysReq,
         providers: [{ name: "Steam", url: "https://store.steampowered.com/app/10/", price: 480 }]
     }

@@ -83,20 +83,12 @@ const Navbar = () => {
 const HeroSection = ({ activeEra, setActiveEra, games = [] }) => (
     <header style={{ padding: '4.5rem 0 3rem', position: 'relative', background: 'radial-gradient(ellipse 90% 60% at 50% -10%, rgba(168, 85, 247, 0.16), transparent 75%)', borderBottom: '1px solid var(--border-subtle)' }}>
         <div className="container animate-fade-in" style={{ textAlign: 'center', maxWidth: '1000px' }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.2rem' }}>
-                <span className="badge badge-violet"><Sparkles size={12} /> Framer Community Template Edition • Gemini & Groq</span>
-            </div>
             <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4.8rem)', fontWeight: 900, lineHeight: 1.1, marginBottom: '1.2rem', letterSpacing: '-0.035em' }}>
                 THE NEXT-GEN GAME <span className="gradient-text-violet">INTELLIGENCE</span> VAULT
             </h1>
             <p style={{ fontSize: '1.15rem', color: 'var(--text-secondary)', maxWidth: '680px', margin: '0 auto 2.5rem', lineHeight: 1.6 }}>
                 Explore two decades of PC gaming evolution. Powered by internal <code>.env</code> API keys for real-time live metadata, spec benchmarks, and AI intelligence.
             </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '2.5rem' }}>
-                <div className="glass-panel" style={{ padding: '1rem', textAlign: 'center' }}><div style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--text-violet)' }}>25+ Masterpieces</div><div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Indexed Eras (2000-2026)</div></div>
-                <div className="glass-panel" style={{ padding: '1rem', textAlign: 'center' }}><div style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--text-emerald)' }}>Internal .env Keys</div><div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Gemini & Groq Auto-Loaded</div></div>
-                <div className="glass-panel" style={{ padding: '1rem', textAlign: 'center' }}><div style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--text-cyan)' }}>Rig Benchmark</div><div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Instant 1080p/1440p/4K Meter</div></div>
-            </div>
             <LiveAIFetcher />
             <FramerHeroMarquee games={games} />
             <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem' }}>
@@ -120,7 +112,6 @@ const Home = ({ activeEra, games = [] }) => {
     const navigate = useNavigate();
     const filterByEra = (eraKey) => games.filter(g => g.yearRange === eraKey);
     return <main className="container" style={{ paddingBottom: '4rem', paddingTop: '3rem' }}>
-        <FramerFeatureCards />
         <HardwareDetection />
         <div className="animate-fade-in">
             {activeEra === 'ALL' || activeEra === '2023-Present' ? <EraSection title="New Era (2023–Present)" games={filterByEra('2023-Present')} navigate={navigate} /> : null}

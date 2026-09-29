@@ -106,7 +106,8 @@ function cleanJsonOutput(text) {
  * Query any game by name and return rich structured game data!
  */
 export async function fetchLiveGameDataAI({ gameTitle, geminiKey, groqKey, preferredProvider = 'gemini' }) {
-    const prompt = `Provide detailed metadata for the PC game titled "${gameTitle}". Return a JSON object with EXACTLY these keys:
+    const prompt = `CRITICAL INSTRUCTION: You MUST provide ONLY 100% real, factual, accurate details for the PC game titled "${gameTitle}". Do NOT hallucinate or invent fake details, fake features, or fake system requirements. 
+Provide detailed metadata for the game. Return a JSON object with EXACTLY these keys:
 {
   "title": "Full Game Title",
   "shortDescription": "1-2 punchy sentences about why this game is iconic.",
@@ -120,7 +121,7 @@ export async function fetchLiveGameDataAI({ gameTitle, geminiKey, groqKey, prefe
   "yearRange": "2023-Present", // Options: 2023-Present, 2020-2022, 2015-2019, 2010-2014, 2005-2009, 2000-2004
   "metacriticScore": 92,
   "estimatedPlayers": "120,000+ Concurrent Players",
-  "posterImage": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1091500/library_hero.jpg",
+  "steamAppId": 1091500, // IMPORTANT: Provide the EXACT, REAL Steam App ID for this game as an integer. If the game is not on Steam or you don't know it, return null.
   "systemRequirements": {
     "minimum": { "os": "Windows 10 64-bit", "cpu": "Intel Core i5-8400 or AMD Ryzen 5 2600", "gpu": "NVIDIA GeForce GTX 1060 (6GB)", "ram": "12GB", "storage": "70GB SSD" },
     "recommended": { "os": "Windows 11 64-bit", "cpu": "Intel Core i7-10700K or AMD Ryzen 7 3700X", "gpu": "NVIDIA GeForce RTX 3070 (8GB)", "ram": "16GB", "storage": "70GB NVMe SSD" }
@@ -136,7 +137,12 @@ export async function fetchLiveGameDataAI({ gameTitle, geminiKey, groqKey, prefe
         try {
             const raw = await callGemini(geminiKey, prompt, true);
             const parsed = cleanJsonOutput(raw);
-            if (parsed && parsed.title) return { ...parsed, isRealTimeAI: true, providerUsed: 'Gemini 1.5 Flash' };
+            if (parsed && parsed.title) {
+                if (parsed.steamAppId) {
+                    parsed.posterImage = `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${parsed.steamAppId}/library_600x900.jpg`;
+                }
+                return { ...parsed, isRealTimeAI: true, providerUsed: 'Gemini 1.5 Flash' };
+            }
         } catch (err) {
             console.warn("Gemini fetch failed, falling back...", err);
         }
@@ -146,7 +152,12 @@ export async function fetchLiveGameDataAI({ gameTitle, geminiKey, groqKey, prefe
         try {
             const raw = await callGroq(groqKey, prompt, true);
             const parsed = cleanJsonOutput(raw);
-            if (parsed && parsed.title) return { ...parsed, isRealTimeAI: true, providerUsed: 'Groq Llama 3.3 70B' };
+            if (parsed && parsed.title) {
+                if (parsed.steamAppId) {
+                    parsed.posterImage = `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${parsed.steamAppId}/library_600x900.jpg`;
+                }
+                return { ...parsed, isRealTimeAI: true, providerUsed: 'Groq Llama 3.3 70B' };
+            }
         } catch (err) {
             console.warn("Groq fetch failed, falling back...", err);
         }

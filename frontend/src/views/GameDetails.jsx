@@ -16,7 +16,7 @@ const GameDetails = () => {
     const [loading, setLoading] = useState(true);
     const [copied, setCopied] = useState(false);
 
-    const isWishlisted = game ? wishlist.includes(game._id) : false;
+    const isWishlisted = game && Array.isArray(wishlist) ? wishlist.includes(game._id) : false;
 
     const toggleWishlist = () => {
         if (!user) {
